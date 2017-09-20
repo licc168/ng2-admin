@@ -3,6 +3,8 @@ import { Routes } from '@angular/router';
 
 import { BaMenuService } from '../theme';
 import { PAGES_MENU } from './pages.menu';
+import {MenuService} from "../theme/services/menu.service";
+import {CONSTANTS} from "../app.const";
 
 @Component({
   selector: 'pages',
@@ -32,10 +34,23 @@ import { PAGES_MENU } from './pages.menu';
 })
 export class Pages {
 
-  constructor(private _menuService: BaMenuService,) {
+  public pagesMenu:any = [];
+  constructor(private _menuService: BaMenuService,private menuService:MenuService ) {
   }
 
   ngOnInit() {
-    this._menuService.updateMenuByRoutes(<Routes>PAGES_MENU);
+    this.menuService.list()
+      .subscribe(
+        data => {
+          if (data.status === CONSTANTS.HTTPStatus.SUCCESS) {
+            let menus = data.text();
+            menus = menus.replace(/\'/g,"\"");
+            this.pagesMenu = JSON.parse(menus);
+            this._menuService.updateMenuByRoutes(<Routes> this.pagesMenu );
+          }
+        },
+        error => {
+
+        });
   }
 }

@@ -2,26 +2,31 @@ import {Component} from '@angular/core';
 import {FormGroup, AbstractControl, FormBuilder, Validators} from '@angular/forms';
 import {EmailValidator, EqualPasswordsValidator} from '../../theme/validators';
 
+import 'style-loader!./register.scss';
+import {UserService} from "../../theme/services/user/user.service";
+import {CONSTANTS} from "../../app.const";
+import {User} from "../../theme/models/user";
+
+
 @Component({
   selector: 'register',
   templateUrl: './register.html',
-  styleUrls: ['./register.scss']
 })
 export class Register {
 
   public form:FormGroup;
-  public name:AbstractControl;
+  public userName:AbstractControl;
   public email:AbstractControl;
   public password:AbstractControl;
   public repeatPassword:AbstractControl;
   public passwords:FormGroup;
-
+  public user:User;
   public submitted:boolean = false;
 
-  constructor(fb:FormBuilder) {
+  constructor(fb:FormBuilder,private userService:UserService) {
 
     this.form = fb.group({
-      'name': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
+      'userName': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
       'email': ['', Validators.compose([Validators.required, EmailValidator.validate])],
       'passwords': fb.group({
         'password': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
@@ -29,18 +34,27 @@ export class Register {
       }, {validator: EqualPasswordsValidator.validate('password', 'repeatPassword')})
     });
 
-    this.name = this.form.controls['name'];
+    this.userName = this.form.controls['userName'];
     this.email = this.form.controls['email'];
     this.passwords = <FormGroup> this.form.controls['passwords'];
     this.password = this.passwords.controls['password'];
     this.repeatPassword = this.passwords.controls['repeatPassword'];
   }
 
-  public onSubmit(values:Object):void {
-    this.submitted = true;
+  public onSubmit(values:User):void {
+    let user = new User();
+    user.password = values.passwords.password;
+    user.userName = values.userName;
+    user.email = values.email;
     if (this.form.valid) {
-      // your code goes here
-      // console.log(values);
+     this.userService.register(user).subscribe(
+       (data) => {
+         if (data.status === CONSTANTS.HTTPStatus.SUCCESS) {
+         }
+       },
+         error => {
+
+       });
     }
   }
 }

@@ -1,0 +1,19 @@
+
+
+<nz-table #nzTable [nzDataSource]="totalElements" [nzPageSize]="10" [nzShowSizeChanger]="true">
+  <thead nz-thead>
+  <tr>
+    <th nz-th><span>用户名</span></th>
+    <th nz-th><span>邮箱</span></th>
+  </tr>
+  </thead>
+  <tbody nz-tbody>
+  <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+    <td nz-td>
+      <a>{{data.name}}</a>
+    </td>
+    <td nz-td>{{data.email}}</td>
+
+  </tr>
+  </tbody>
+</nz-table>
