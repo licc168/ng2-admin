@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 
 import {GlobalState} from '../../../global.state';
-import {AuthenticationService} from "app/theme/services/login/authentication.service";
+import {AuthenticationService} from "../../../services/authentication.service";
 
 @Component({
   selector: 'ba-page-top',

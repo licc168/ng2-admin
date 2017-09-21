@@ -9,15 +9,16 @@ import {
 }
 from '@angular/router';
 import {CookieOptionsArgs, CookieService} from "angular2-cookie/core";
-import {CONSTANTS} from "../../../app.const";
+import {CONSTANTS} from "../app.const";
+
 
 
 @Injectable()
 export class AuthGuard implements  CanActivate , CanActivateChild, CanLoad {
-  constructor(private router: Router,private  _cookieService:CookieService) {}
+  constructor(private router: Router, private  _cookieService: CookieService) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    let url: string = state.url;
+    const url: string = state.url;
     return this.checkLogin(url);
   }
 
@@ -26,19 +27,18 @@ export class AuthGuard implements  CanActivate , CanActivateChild, CanLoad {
   }
 
   canLoad(route: Route): boolean {
-    let url = `/${route.path}`;
+    const url = `/${route.path}`;
 
     return this.checkLogin(url);
   }
 
   checkLogin(url: string): boolean {
-   let token = this._cookieService.get(CONSTANTS.JWT.COOKIE_NAME);
+    const token = this._cookieService.get(CONSTANTS.JWT.COOKIE_NAME);
     if (token) {
       return true;
     }
-    let navigationExtras: NavigationExtras = {
-      queryParams: { 'returnUrl': url },
-      fragment: 'anchor'
+    const navigationExtras: NavigationExtras = {
+      queryParams: { 'returnUrl': url }
     };
 
     this.router.navigate(['/login'], navigationExtras);

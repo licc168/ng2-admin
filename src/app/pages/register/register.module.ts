@@ -5,7 +5,7 @@ import { NgaModule } from '../../theme/nga.module';
 
 import { Register } from './register.component';
 import { routing }       from './register.routing';
-import {UserService} from "../../theme/services/user/user.service";
+import {UserService} from "../../services/user.service";
 
 
 @NgModule({

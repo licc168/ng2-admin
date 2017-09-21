@@ -3,9 +3,9 @@ import {FormGroup, AbstractControl, FormBuilder, Validators} from '@angular/form
 import {EmailValidator, EqualPasswordsValidator} from '../../theme/validators';
 
 import 'style-loader!./register.scss';
-import {UserService} from "../../theme/services/user/user.service";
 import {CONSTANTS} from "../../app.const";
-import {User} from "../../theme/models/user";
+import {User} from "../../models/user";
+import {UserService} from "../../services/user.service";
 
 
 @Component({

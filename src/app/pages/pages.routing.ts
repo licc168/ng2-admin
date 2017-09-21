@@ -1,7 +1,8 @@
 import { Routes, RouterModule }  from '@angular/router';
 import { Pages } from './pages.component';
 import { ModuleWithProviders } from '@angular/core';
-import {AuthGuard} from "../theme/services/guards/auth.guard";
+import {UserComponent} from "./user/user.component";
+import {AuthGuard} from "../guards/auth.guard";
 
 // noinspection TypeScriptValidateTypes
 
@@ -22,7 +23,8 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule', canLoad: [AuthGuard]},
-      {path: 'user', loadChildren: 'app/pages/user/user.module#UserModule', canLoad: [AuthGuard]}
+      {path: 'user', loadChildren: 'app/pages/user/user.module#UserModule', canLoad: [AuthGuard]},
+      {path: 'sys/menu', loadChildren: 'app/pages/menu/menu.module#MenuModule', canLoad: [AuthGuard]}
 
     ]
   }

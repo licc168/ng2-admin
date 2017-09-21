@@ -8,9 +8,8 @@ import {NgbDropdownModule, NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {routing} from "./user.routing";
 import {UserComponent} from "./user.component";
-import {UserListComponent} from "./list/userList.component";
-import {UserService} from "../../theme/services/user/user.service";
 import { NgZorroAntdModule } from 'ng-zorro-antd';
+import {UserService} from "../../services/user.service";
 
 @NgModule({
 
@@ -25,8 +24,8 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
     routing
   ],
   declarations: [
-    UserComponent,
-    UserListComponent
+    UserComponent
+
   ],
   entryComponents: [
   ],

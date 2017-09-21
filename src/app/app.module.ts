@@ -1,10 +1,10 @@
-import { NgModule, ApplicationRef } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { RouterModule } from '@angular/router';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgZorroAntdModule } from 'ng-zorro-antd';
+// core
+import {BrowserModule} from "@angular/platform-browser";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {NgModule} from "@angular/core";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HttpModule} from "@angular/http";
+import {NgZorroAntdModule} from "ng-zorro-antd";
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -18,8 +18,8 @@ import { GlobalState } from './global.state';
 import { NgaModule } from './theme/nga.module';
 import { PagesModule } from './pages/pages.module';
 import {CookieService} from "angular2-cookie/core";
-import {AuthenticationService} from "./theme/services/login/authentication.service";
-
+import {AuthenticationService} from "./services/authentication.service";
+import {RouterModule} from "@angular/router";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -41,18 +41,18 @@ export type StoreType = {
 @NgModule({
   bootstrap: [App],
   declarations: [
-    App
+    App,
+
   ],
   imports: [ // import Angular's modules
     BrowserModule,
     HttpModule,
-    RouterModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     NgaModule.forRoot(),
-    NgbModule.forRoot(),
+    RouterModule,
     PagesModule,
-    NgZorroAntdModule.forRoot(),
     routing
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection

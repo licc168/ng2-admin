@@ -5,9 +5,9 @@ import { NgaModule } from '../../theme/nga.module';
 
 import { Login } from './login.component';
 import { routing }       from './login.routing';
-import {AuthenticationService} from "../../theme/services/login/authentication.service";
 import {HttpModule} from "@angular/http";
 import {AlertModule} from "ng2-bootstrap";
+import {AuthenticationService} from "../../services/authentication.service";
 
 @NgModule({
   imports: [

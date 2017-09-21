@@ -6,8 +6,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 
 
 import 'style-loader!./login.scss';
-import {AuthenticationService} from "../../theme/services/login/authentication.service";
 import {CONSTANTS} from "../../app.const";
+import {AuthenticationService} from "../../services/authentication.service";
 
 @Component({
   selector: 'login',
@@ -15,18 +15,18 @@ import {CONSTANTS} from "../../app.const";
 })
 export class Login implements OnInit {
 
-  public form:FormGroup;
-  public userName:AbstractControl;
-  public password:AbstractControl;
-  public submitted:boolean = false;
-  public returnUrl:string;
-  public errorMessage:string;
-  public alerts:any = [];
+   form:FormGroup;
+   userName:AbstractControl;
+   password:AbstractControl;
+   submitted:boolean = false;
+   returnUrl:string;
+   errorMessage:string;
+   alerts:any = [];
 
-  constructor(fb:FormBuilder,
-              private route:ActivatedRoute,
-              private router:Router,
-              private authenticationService:AuthenticationService) {
+  constructor(fb: FormBuilder,
+              private route: ActivatedRoute,
+              private router: Router,
+              private authenticationService: AuthenticationService) {
     this.form = fb.group({
       'userName': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
       'password': ['', Validators.compose([Validators.required, Validators.minLength(4)])]
@@ -60,10 +60,10 @@ export class Login implements OnInit {
       },
         error => {
 
-        let status = error.status;
+        const status = error.status;
         switch (status) {
           case  CONSTANTS.HTTPStatus.UNAUTHORIZED:
-            let message = JSON.parse(error._body).message.replace("Authentication Failed:", "").trim();
+            const message = JSON.parse(error._body).message.replace("Authentication Failed:", "").trim();
             switch (message) {
               case "Bad credentials":
                 this.errorMessage = "用户名或密码错误";
