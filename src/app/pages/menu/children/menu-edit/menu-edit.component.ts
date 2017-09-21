@@ -4,44 +4,50 @@ import {Router, ActivatedRoute} from '@angular/router';
 import {MenuService} from "../../../../services/menu.service";
 import {Menu} from "../../../../models/menu";
 import {CONSTANTS} from "../../../../app.const";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
-    selector: 'nz-menu-edit',
-    templateUrl: './menu-edit.component.html',
-    styleUrls: ['./menu-edit.component.less']
+  selector: 'nz-menu-edit',
+  templateUrl: './menu-edit.component.html',
+  styleUrls: ['./menu-edit.component.less']
 })
 export class MenuEditComponent implements OnInit {
-    _id = '';
+  _id = '';
   validateForm: FormGroup;
   menus: Array<Object>;
+  public id:AbstractControl;
+  public title:AbstractControl;
+  public parentId:AbstractControl;
+  public icon:AbstractControl;
+  public path:AbstractControl;
+  public orderNum:AbstractControl;
 
-
-  constructor(private menuService: MenuService, private _message: NzMessageService, private router: Router, private route: ActivatedRoute,fb: FormBuilder) {
+  constructor(private menuService: MenuService, private _message: NzMessageService, private router: Router, private route: ActivatedRoute, fb: FormBuilder) {
 
     this.validateForm = fb.group({
-      'id': [''],
-      'title': ['', Validators.compose([Validators.required])],
-      'parentId': [''],
-      'icon': [''],
-      'path': [''],
-      'orderNum': [''],
+      id: [''],
+      title: ['', Validators.compose([Validators.required])],
+      parentId: [''],
+      icon: [''],
+      path: [''],
+      orderNum: [''],
 
 
     });
 
-        this.route.params.subscribe((params) => {
-            console.dir(params);
-            this._id = params['id'] || '';
-        });
-    }
-  createMessage = (type, text) => {
-    this._message.create(type,text);
+    this.route.params.subscribe((params) => {
+      console.dir(params);
+      this._id = params['id'] || '';
+    });
   }
 
-    ngOnInit(): void {
-      this.parentList();
-    }
+  createMessage = (type, text) => {
+    this._message.create(type, text);
+  }
+
+  ngOnInit(): void {
+    this.parentList();
+  }
 
   parentList() {
 
@@ -57,24 +63,24 @@ export class MenuEditComponent implements OnInit {
 
       });
   }
+
   getFormControl(name) {
     return this.validateForm.controls[name];
   }
 
   public onSubmit(menu: Menu): void {
-        debugger
 
-      this.menuService.saveMenu(menu).subscribe(
-        (data) => {
-          if (data.status === CONSTANTS.HTTPStatus.SUCCESS) {
-            this.createMessage("success","操作成功");
-          }
-        },
-        error => {
-          this.createMessage("error","操作失败");
+    this.menuService.saveMenu(menu).subscribe(
+      (data) => {
+        if (data.status === CONSTANTS.HTTPStatus.SUCCESS) {
+          this.createMessage("success", "操作成功");
+        }
+      },
+      error => {
+        this.createMessage("error", "操作失败");
 
-        });
-    };
+      });
+  };
 
   resetForm($event: MouseEvent) {
     $event.preventDefault();
