@@ -4,7 +4,7 @@
       <label nz-form-item-required>上级目录</label>
     </div>
     <div nz-form-control nz-col [nzSpan]="12">
-      <nz-select formControlName="parentId" [nzSize]="'large'" >
+      <nz-select formControlName="parentId" [nzSize]="'large'"  [(ngModel)]="parentId">
         <nz-option   *ngFor="let item of menus" [nzLabel]="item.title" [nzValue]="item.id"></nz-option>
       </nz-select>
     </div>
@@ -49,7 +49,7 @@
       <label nz-form-item>路径</label>
     </div>
     <div nz-col [nzSpan]="12" nz-form-control [nzValidateStatus]="getFormControl('icon')" nzHasFeedback>
-      <nz-input formControlName="path"
+      <nz-input formControlName="path"  [(ngModel)]="path"
                 [nzType]="'text'"
                 [nzPlaceHolder]="'路径'"
                 [nzSize]="'large'">
@@ -63,7 +63,7 @@
       <label nz-form-item>排序</label>
     </div>
     <div nz-col [nzSpan]="12" nz-form-control [nzValidateStatus]="getFormControl('orderNum')" nzHasFeedback>
-      <nz-input-number  formControlName="orderNum"  [nzMin]="1" [nzMax]="10" [nzStep]="0"
+      <nz-input-number  formControlName="orderNum"  [nzMin]="1" [nzMax]="10" [nzStep]="0" [(ngModel)]="orderNum"
                 [nzPlaceHolder]="'排序'"
                 [nzSize]="'large'">
       </nz-input-number>
@@ -88,5 +88,6 @@
       </button>
     </div>
   </div>
+  <input type="hidden" name="id" [ngModel]="id"  formControlName="id">
 
 </form>

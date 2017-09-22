@@ -15,6 +15,8 @@
   <tr>
     <th nz-th><span>用户名</span></th>
     <th nz-th><span>邮箱</span></th>
+    <th  nz-th >操作</th>
+
   </tr>
   </thead>
   <tbody nz-tbody>
@@ -23,6 +25,12 @@
       {{data.userName}}
     </td>
     <td nz-td>{{data.email}}</td>
+    <td nz-td>
+      <nz-popconfirm [nzTitle]="'确定要删除这个用户吗？'" (nzOnConfirm)="deleteById(data.id)" >
+        <a href="avascript:;"><a nz-popconfirm >删除</a></a>
+      </nz-popconfirm>
+
+    </td>
    </tr>
   </tbody>
 </nz-table>

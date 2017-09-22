@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NzMessageService} from 'ng-zorro-antd';
 import {Router, ActivatedRoute} from '@angular/router';
 import {MenuService} from "../../../../services/menu.service";
@@ -21,7 +21,16 @@ export class MenuEditComponent implements OnInit {
   public icon:AbstractControl;
   public path:AbstractControl;
   public orderNum:AbstractControl;
-
+  _flag: boolean;
+  _artId: number;
+  @Input()
+  set flag(value: boolean) {
+    this._flag = value;
+  }
+  @Input()
+  set artId(value: number) {
+    this._artId = value;
+  }
   constructor(private menuService: MenuService, private _message: NzMessageService, private router: Router, private route: ActivatedRoute, fb: FormBuilder) {
 
     this.validateForm = fb.group({
@@ -47,8 +56,35 @@ export class MenuEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.parentList();
+
+    if(this._flag) {
+      this.openEdit(this._artId);
+    }
   }
 
+  openEdit(id:number) {
+
+    this.menuService.getById(id).subscribe(
+      res => {
+        if (res.status === CONSTANTS.HTTPStatus.SUCCESS) {
+
+          const  data = JSON.parse(res.text());
+          this.title = data.title;
+          this.id = data.id;
+          this.icon =data.icon;
+          this.parentId  = data.parentId;
+          this.path  = data.path;
+          this.orderNum  = data.orderNum;
+
+        }
+      },
+      error => {
+
+
+      });
+
+
+  }
   parentList() {
 
     this.menuService.parentList().subscribe(

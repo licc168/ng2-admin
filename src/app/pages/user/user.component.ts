@@ -3,6 +3,7 @@ import {UserService} from "../../services/user.service";
 
 import {CONSTANTS} from "../../app.const";
 import {User} from "../../models/user";
+import {NzMessageService} from "ng-zorro-antd";
 
 @Component({
   selector: 'ng-user',
@@ -16,7 +17,7 @@ export class UserComponent  implements OnInit {
   _dataSet = [];
   _loading = true;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService,private _message: NzMessageService,) {
 
   }
 
@@ -49,13 +50,17 @@ export class UserComponent  implements OnInit {
   }
 
   deleteById(id: number) {
+    debugger
     this.userService.deleteById(id).subscribe(
       res => {
-        if (res.status === CONSTANTS.HTTPStatus.SUCCESS) {
+        if (res.status === CONSTANTS.HTTPStatus.NO_CONTENT) {
 
+          this._message.create("success","删除成功");
+          this.getPageData();
         }
       },
       error => {
+        this._message.create("error","删除失败");
 
 
       });

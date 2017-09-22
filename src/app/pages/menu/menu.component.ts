@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MenuService} from "../../services/menu.service";
 
 import {CONSTANTS} from "../../app.const";
@@ -68,23 +68,39 @@ export class MenuComponent  implements OnInit {
 
       });
   }
-  showModalForComponent() {
+  showModalForComponentAdd() {
     const subscription = this.modalService.open({
       title          : '新增菜单',
       content        : MenuEditComponent,
       onOk() {
       },
       onCancel() {
-        console.log('Click cancel');
       },
       footer         : false,
       componentParams: {
-        name: '测试渲染Component'
+        flag: false
       }
     });
     subscription.subscribe(result => {
-      console.log(result);
-    })
-  }
 
+    });
+  }
+  showModalForComponentEdit(id:number) {
+    const subscription = this.modalService.open({
+      title          : '修改菜单',
+      content        : MenuEditComponent,
+      onOk() {
+      },
+      onCancel() {
+      },
+      footer         : false,
+      componentParams: {
+        flag: true,
+        artId :id
+      }
+    });
+    subscription.subscribe(result => {
+
+    });
+  }
 }
