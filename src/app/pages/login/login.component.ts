@@ -36,7 +36,9 @@ export class Login implements OnInit {
    remember:AbstractControl;
    submitted:boolean = false;
    returnUrl:string;
-   errorMessage:string;
+   nzMessage:string;
+   nzType:String = "error";
+   nzShow:boolean = false;
    alerts:any = [];
 
   constructor(fb: FormBuilder,
@@ -85,30 +87,33 @@ export class Login implements OnInit {
             const message = JSON.parse(error._body).message.replace("Authentication Failed:", "").trim();
             switch (message) {
               case "Bad credentials":
-                this.errorMessage = "用户名或密码错误";
+                this.nzMessage = "用户名或密码错误";
                 break
               default:
-                this.errorMessage = message;
+                this.nzMessage = message;
+                this.nzShow =true;
             }
             break;
           case  CONSTANTS.HTTPStatus.INTERNAL_SERVER_ERROR:
-            this.errorMessage = "系统异常";
+            this.nzMessage = "系统异常";
+            this.nzShow =true;
+
             break;
           case CONSTANTS.HTTPStatus.GATEWAY_TIMEOUT:
-            this.errorMessage = "服务器连接超时";
+            this.nzMessage = "服务器连接超时";
+            this.nzShow =true;
+
             break;
           case CONSTANTS.HTTPStatus.FORBIDDEN:
-            this.errorMessage = "没有权限禁止访问";
+            this.nzMessage = "没有权限禁止访问";
+            this.nzShow =true;
             break;
           default:
-            this.errorMessage = error._body;
+            this.nzMessage = error._body;
+            this.nzShow =true;
+
         }
-        this.alerts = [];
-        this.alerts.push({
-          type: 'danger',
-          msg: this.errorMessage,
-          timeout: 5000
-        });
+
 
       });
   }

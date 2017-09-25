@@ -1,10 +1,15 @@
 <div class="auth-main">
   <div class="auth-block">
     <h1 translate></h1>
-    <div *ngFor="let alert of alerts">
-      <nz-alert [nzType]="'alert.type'" [nzMessage]="'alert.msg'" [nzShowIcon]="'true'">
-      </nz-alert>
-    </div>
+   <div style="width: 400px;margin-bottom: 10px">
+     <nz-alert [nzType]="'error'" *ngIf="nzShow" >
+      <span alert-body>
+        <pre>{{nzMessage}}</pre>
+      </span>
+     </nz-alert>
+
+   </div>
+
 <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="onSubmit(validateForm.value)">
   <div nz-form-item>
     <div nz-form-control [nzValidateStatus]="validateForm.controls.userName">
