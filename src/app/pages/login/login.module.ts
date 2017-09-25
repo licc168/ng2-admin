@@ -6,8 +6,8 @@ import { NgaModule } from '../../theme/nga.module';
 import { Login } from './login.component';
 import { routing }       from './login.routing';
 import {HttpModule} from "@angular/http";
-import {AlertModule} from "ng2-bootstrap";
 import {AuthenticationService} from "../../services/authentication.service";
+import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 @NgModule({
   imports: [
@@ -17,7 +17,7 @@ import {AuthenticationService} from "../../services/authentication.service";
     NgaModule,
     routing,
     HttpModule,
-    AlertModule.forRoot()
+    NgZorroAntdModule
   ],
   providers: [
     AuthenticationService

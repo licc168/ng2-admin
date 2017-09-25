@@ -12,12 +12,28 @@ import {AuthenticationService} from "../../services/authentication.service";
 @Component({
   selector: 'login',
   templateUrl: './login.html',
+  styles: [ `
+    .login-form {
+      max-width: 400px;
+      
+    }
+  
+    .login-form-forgot {
+      float: right;
+    }
+
+    .login-form-button {
+      width: 100%;
+    }
+  `
+  ]
 })
 export class Login implements OnInit {
 
-   form:FormGroup;
+  validateForm:FormGroup;
    userName:AbstractControl;
    password:AbstractControl;
+   remember:AbstractControl;
    submitted:boolean = false;
    returnUrl:string;
    errorMessage:string;
@@ -27,13 +43,16 @@ export class Login implements OnInit {
               private route: ActivatedRoute,
               private router: Router,
               private authenticationService: AuthenticationService) {
-    this.form = fb.group({
+    this.validateForm = fb.group({
       'userName': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
-      'password': ['', Validators.compose([Validators.required, Validators.minLength(4)])]
+      'password': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
+      'remember': [ true ]
     });
 
-    this.userName = this.form.controls['userName'];
-    this.password = this.form.controls['password'];
+    this.userName = this.validateForm.controls['userName'];
+    this.password = this.validateForm.controls['password'];
+    this.remember = this.validateForm.controls['remember'];
+
   }
 
   ngOnInit() {
@@ -45,7 +64,7 @@ export class Login implements OnInit {
 
   public onSubmit(values:Object):void {
     this.submitted = true;
-    if (this.form.valid) {
+    if (this.validateForm.valid) {
       this.login();
     }
   }

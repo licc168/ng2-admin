@@ -4,8 +4,6 @@ import {FormsModule} from '@angular/forms';
 import {NgaModule} from '../../theme/nga.module';
 
 
-import {NgbDropdownModule, NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {routing} from "./user.routing";
 import {UserComponent} from "./user.component";
 import { NgZorroAntdModule } from 'ng-zorro-antd';
@@ -17,8 +15,6 @@ import {UserService} from "../../services/user.service";
     CommonModule,
     FormsModule,
     NgaModule,
-    NgbDropdownModule,
-    NgbModalModule,
     NgZorroAntdModule,
 
     routing
@@ -30,8 +26,7 @@ import {UserService} from "../../services/user.service";
   entryComponents: [
   ],
   providers: [
-    UserService,
-    NgbActiveModal,
+    UserService
 
   ]
 })

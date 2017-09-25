@@ -4,8 +4,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgaModule} from '../../theme/nga.module';
 
 
-import {NgbDropdownModule, NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {routing} from "./menu.routing";
 import {MenuComponent} from "./menu.component";
 import { NgZorroAntdModule } from 'ng-zorro-antd';
@@ -19,8 +17,6 @@ import {MenuEditComponent} from "./children/menu-edit/menu-edit.component";
     FormsModule,
     ReactiveFormsModule,
     NgaModule,
-    NgbDropdownModule,
-    NgbModalModule,
     NgZorroAntdModule,
 
     routing
@@ -33,8 +29,7 @@ import {MenuEditComponent} from "./children/menu-edit/menu-edit.component";
     MenuEditComponent
   ],
   providers: [
-    MenuService,
-    NgbActiveModal,
+    MenuService
 
   ]
 })

@@ -21,10 +21,8 @@
       "styles": [
         "../node_modules/normalize.css/normalize.css",
         "../node_modules/font-awesome/scss/font-awesome.scss",
-        "../node_modules/ionicons/scss/ionicons.scss",
         "../node_modules/bootstrap/scss/bootstrap.scss",
-        "../node_modules/fullcalendar/dist/fullcalendar.css",
-        "../node_modules/ng2-slim-loading-bar/style.css",
+        "../node_modules/ionicons/scss/ionicons.scss",
         "app/theme/theme.scss",
         "styles.scss"
       ],
