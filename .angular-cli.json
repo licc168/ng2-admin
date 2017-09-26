@@ -30,8 +30,7 @@
         "../node_modules/jquery/dist/jquery.js",
         "../node_modules/jquery-slimscroll/jquery.slimscroll.js",
         "../node_modules/tether/dist/js/tether.js",
-        "../node_modules/bootstrap/dist/js/bootstrap.js",
-        "../node_modules/chroma-js/chroma.js"
+        "../node_modules/bootstrap/dist/js/bootstrap.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
